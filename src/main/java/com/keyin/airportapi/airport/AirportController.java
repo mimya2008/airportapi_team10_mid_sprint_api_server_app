@@ -1,8 +1,14 @@
 package com.keyin.airportapi.airport;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 @RestController
-@CrossOrigin
 @RequestMapping("/airport")
+@CrossOrigin
 public class AirportController {
 
     @Autowired
@@ -19,14 +25,20 @@ public class AirportController {
         return (airport != null) ? ResponseEntity.ok(airport) : ResponseEntity.notFound().build();
     }
 
+    @GetMapping("/search")
+    public List<Airport> getAirportsByCityName(@RequestParam("city") String cityName) {
+        return airportService.getAirportsByCityName(cityName);
+    }
+
     @PostMapping
     public Airport createAirport(@RequestBody Airport airport) {
         return airportService.createAirport(airport);
     }
 
     @PutMapping("/{id}")
-    public Airport updateAirport(@PathVariable Long id, @RequestBody Airport airport) {
-        return airportService.updateAirport(id, airport);
+    public ResponseEntity<Airport> updateAirport(@PathVariable Long id, @RequestBody Airport airport) {
+        Airport updated = airportService.updateAirport(id, airport);
+        return (updated != null) ? ResponseEntity.ok(updated) : ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")
@@ -34,4 +46,3 @@ public class AirportController {
         airportService.deleteAirport(id);
     }
 }
-
