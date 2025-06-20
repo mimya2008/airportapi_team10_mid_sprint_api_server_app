@@ -1,4 +1,4 @@
-package com.keyin.airportapi.model;
+package com.keyin.airportapi.airport;
 
 import jakarta.persistence.*;
 import java.util.Set;
