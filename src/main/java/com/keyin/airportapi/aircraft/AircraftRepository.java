@@ -1,8 +1,10 @@
-package com.keyin.airportapi.repository;
+package com.keyin.airportapi.aircraft;
 
-import com.keyin.airportapi.model.Aircraft;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface AircraftRepository extends JpaRepository<Aircraft, Long> {
 }
+
 
