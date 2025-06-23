@@ -1,5 +1,6 @@
 package com.keyin.airportapi.aircraft;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.keyin.airportapi.airport.Airport;
 import jakarta.persistence.*;
 
@@ -17,6 +18,7 @@ public class Aircraft {
     private int numberOfPassengers;
 
     @ManyToMany
+    @JsonIgnore
     @JoinTable(
             name = "aircraft_airport",
             joinColumns = @JoinColumn(name = "aircraft_id"),
