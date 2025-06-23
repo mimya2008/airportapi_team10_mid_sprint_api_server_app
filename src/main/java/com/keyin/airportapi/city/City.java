@@ -1,5 +1,6 @@
 package com.keyin.airportapi.city;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.keyin.airportapi.airport.Airport;
 import com.keyin.airportapi.passenger.Passenger;
 import jakarta.persistence.*;
@@ -17,9 +18,11 @@ public class City {
     private int population;
 
     @OneToMany(mappedBy = "city")
+    @JsonIgnore // Prevents infinite recursion
     private Set<Airport> airports;
 
     @OneToMany(mappedBy = "city")
+    @JsonIgnore // Prevents infinite recursion
     private Set<Passenger> passengers;
 
     // Getters and Setters
