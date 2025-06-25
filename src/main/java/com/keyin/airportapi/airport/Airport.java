@@ -1,5 +1,6 @@
 package com.keyin.airportapi.airport;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.keyin.airportapi.aircraft.Aircraft;
 import com.keyin.airportapi.city.City;
@@ -22,6 +23,8 @@ public class Airport {
     private Set<Aircraft> aircraft;
 
     @ManyToOne
+    @JoinColumn(name = "city_id")
+    @JsonBackReference(value = "city-airport")
     private City city;
 
     // ----- Getters and Setters -----
