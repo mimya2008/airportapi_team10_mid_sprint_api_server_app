@@ -18,7 +18,7 @@ public class Aircraft {
     private int numberOfPassengers;
 
     @ManyToMany
-    @JsonIgnore
+
     @JoinTable(
             name = "aircraft_airport",
             joinColumns = @JoinColumn(name = "aircraft_id"),
