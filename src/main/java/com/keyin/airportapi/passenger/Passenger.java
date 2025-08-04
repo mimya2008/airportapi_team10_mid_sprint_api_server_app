@@ -1,5 +1,6 @@
 package com.keyin.airportapi.passenger;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.keyin.airportapi.aircraft.Aircraft;
 import com.keyin.airportapi.city.City;
 import jakarta.persistence.*;
@@ -17,6 +18,8 @@ public class Passenger {
     private String phoneNumber;
 
     @ManyToOne
+    @JoinColumn(name = "city_id")
+    @JsonBackReference(value = "city-passenger")
     private City city;
 
     @ManyToMany
