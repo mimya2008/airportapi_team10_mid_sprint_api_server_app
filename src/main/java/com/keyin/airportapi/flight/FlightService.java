@@ -6,6 +6,7 @@ package com.keyin.airportapi.flight;
  import com.keyin.airportapi.airport.Airport;
  import com.keyin.airportapi.airport.AirportRepository;
  import jakarta.persistence.*;
+ import java.util.List;
  import org.springframework.beans.factory.annotation.Autowired;
  import org.springframework.stereotype.Service;
 
@@ -44,5 +45,14 @@ public class FlightService {
 
         return flightRepository.save(flight);
     }
+
+    public List<Flight> getArrivalsByAirportId(Long airportId) {
+        return flightRepository.findByArrivalAirportId(airportId);
+    }
+
+    public List<Flight> getDeparturesByAirportId(Long airportId) {
+        return flightRepository.findByDepartureAirportId(airportId);
+    }
+
 }
 
