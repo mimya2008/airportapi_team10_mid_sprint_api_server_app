@@ -20,8 +20,8 @@ public class AirportService {
         return airportRepository.findById(id).orElse(null);
     }
 
-    public List<Airport> getAirportsByCityName(String cityName) {
-        return airportRepository.findByCity_Name(cityName);
+    public Optional<Airport> getAirportsByCityName(String cityName) {
+        return airportRepository.findByName(cityName);
     }
 
     public Airport createAirport(Airport airport) {

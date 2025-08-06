@@ -25,19 +25,18 @@ public class FlightService {
     private AircraftRepository aircraftRepository;
 
     public Flight addFlight(Flight flight) {
-        Airport departure = airportRepository.findById(flight.getDepartureAirport().getId())
+        Airport departure = airportRepository.findByName(flight.getDepartureAirport().getName())
                 .orElseThrow(() -> new RuntimeException("Departure airport not found"));
 
-        Airport arrival = airportRepository.findById(flight.getArrivalAirport().getId())
+        Airport arrival = airportRepository.findByName(flight.getArrivalAirport().getName())
                 .orElseThrow(() -> new RuntimeException("Arrival airport not found"));
 
-        Airline airline = airlineRepository.findById(flight.getAirline().getId())
+        Airline airline = airlineRepository.findByName(flight.getAirline().getName())
                 .orElseThrow(() -> new RuntimeException("Airline not found"));
 
-        Aircraft aircraft = aircraftRepository.findById(flight.getAircraft().getId())
+        Aircraft aircraft = aircraftRepository.findByType(flight.getAircraft().getType())
                 .orElseThrow(() -> new RuntimeException("Aircraft not found"));
 
-        // Set full entities
         flight.setDepartureAirport(departure);
         flight.setArrivalAirport(arrival);
         flight.setAirline(airline);
@@ -46,12 +45,12 @@ public class FlightService {
         return flightRepository.save(flight);
     }
 
-    public List<Flight> getArrivalsByAirportId(Long airportId) {
-        return flightRepository.findByArrivalAirportId(airportId);
+    public List<Flight> getArrivalsByAirportName(String name) {
+        return flightRepository.findByArrivalAirport_Name(name);
     }
 
-    public List<Flight> getDeparturesByAirportId(Long airportId) {
-        return flightRepository.findByDepartureAirportId(airportId);
+    public List<Flight> getDeparturesByAirportName(String name) {
+        return flightRepository.findByDepartureAirport_Name(name);
     }
 
 }

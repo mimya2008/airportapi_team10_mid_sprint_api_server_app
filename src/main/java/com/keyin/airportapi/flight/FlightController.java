@@ -19,13 +19,14 @@ public class FlightController {
     }
 
     @GetMapping("/arrivals")
-    public ResponseEntity<List<Flight>> getArrivals(@RequestParam Long airportId) {
-        return ResponseEntity.ok(flightService.getArrivalsByAirportId(airportId));
+    public ResponseEntity<List<Flight>> getArrivals(@RequestParam String airportName) {
+        return ResponseEntity.ok(flightService.getArrivalsByAirportName(airportName));
     }
 
     @GetMapping("/departures")
-    public ResponseEntity<List<Flight>> getDepartures(@RequestParam Long airportId) {
-        return ResponseEntity.ok(flightService.getDeparturesByAirportId(airportId));
+    public ResponseEntity<List<Flight>> getDepartures(@RequestParam String airportName) {
+        return ResponseEntity.ok(flightService.getDeparturesByAirportName(airportName));
     }
+
 }
 
