@@ -30,6 +30,7 @@ public class AirportController {
         return airportService.getAirportsByCityName(cityName);
     }
 
+
     @PostMapping
     public Airport createAirport(@RequestBody Airport airport) {
         return airportService.createAirport(airport);
