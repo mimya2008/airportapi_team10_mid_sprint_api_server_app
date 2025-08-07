@@ -45,13 +45,5 @@ public class FlightService {
         return flightRepository.save(flight);
     }
 
-    public List<Flight> getArrivalsByAirportName(String name) {
-        return flightRepository.findByArrivalAirport_Name(name);
-    }
-
-    public List<Flight> getDeparturesByAirportName(String name) {
-        return flightRepository.findByDepartureAirport_Name(name);
-    }
-
 }
 
