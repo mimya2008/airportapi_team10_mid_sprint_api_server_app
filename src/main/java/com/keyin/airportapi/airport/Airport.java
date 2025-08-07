@@ -27,7 +27,7 @@ public class Airport {
     @JsonBackReference(value = "city-airport")
     private City city;
 
-    // ----- Getters and Setters -----
+    // Getters and Setters
 
     public Long getId() {
         return id;
