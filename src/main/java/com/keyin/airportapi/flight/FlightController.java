@@ -34,5 +34,18 @@ public class FlightController {
         return ResponseEntity.ok(flightService.getAllFlights());
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Flight> updateFlight(@PathVariable Long id, @RequestBody Flight updatedFlight) {
+        Flight updated = flightService.updateFlight(id, updatedFlight);
+        return (updated != null) ? ResponseEntity.ok(updated) : ResponseEntity.notFound().build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteFlight(@PathVariable Long id) {
+        boolean deleted = flightService.deleteFlight(id);
+        return deleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
+    }
+
+
 }
 
