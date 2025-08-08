@@ -28,5 +28,10 @@ public class FlightController {
         return ResponseEntity.ok(flightService.getDeparturesByAirportName(airportName));
     }
 
+    @GetMapping
+    public ResponseEntity<List<Flight>> getAllFlights() {
+        return ResponseEntity.ok(flightService.getAllFlights());
+    }
+
 }
 

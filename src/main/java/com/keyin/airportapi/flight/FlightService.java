@@ -52,5 +52,9 @@ public class FlightService {
         return flightRepository.findByDepartureAirport_Name(name);
     }
 
+    public List<Flight> getAllFlights() {
+        return flightRepository.findAll();
+    }
+
 }
 
