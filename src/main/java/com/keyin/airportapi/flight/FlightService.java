@@ -56,5 +56,44 @@ public class FlightService {
         return flightRepository.findAll();
     }
 
+    public Flight updateFlight(Long id, Flight updatedFlightData) {
+        return flightRepository.findById(id).map(existingFlight -> {
+            existingFlight.setFlightNumber(updatedFlightData.getFlightNumber());
+            existingFlight.setGate(updatedFlightData.getGate());
+            existingFlight.setFromLocation(updatedFlightData.getFromLocation());
+            existingFlight.setDestination(updatedFlightData.getDestination());
+            existingFlight.setScheduledDateTime(updatedFlightData.getScheduledDateTime());
+
+            // Resolve referenced entities by name
+            Airport departure = airportRepository.findByName(updatedFlightData.getDepartureAirport().getName())
+                    .orElseThrow(() -> new RuntimeException("Departure airport not found"));
+
+            Airport arrival = airportRepository.findByName(updatedFlightData.getArrivalAirport().getName())
+                    .orElseThrow(() -> new RuntimeException("Arrival airport not found"));
+
+            Airline airline = airlineRepository.findByName(updatedFlightData.getAirline().getName())
+                    .orElseThrow(() -> new RuntimeException("Airline not found"));
+
+            Aircraft aircraft = aircraftRepository.findByType(updatedFlightData.getAircraft().getType())
+                    .orElseThrow(() -> new RuntimeException("Aircraft not found"));
+
+            existingFlight.setDepartureAirport(departure);
+            existingFlight.setArrivalAirport(arrival);
+            existingFlight.setAirline(airline);
+            existingFlight.setAircraft(aircraft);
+
+            return flightRepository.save(existingFlight);
+        }).orElse(null);
+    }
+
+    public boolean deleteFlight(Long id) {
+        if (flightRepository.existsById(id)) {
+            flightRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
+
+
 }
 
