@@ -24,4 +24,16 @@ public class AirlineController {
     public ResponseEntity<List<Airline>> getAllAirlines() {
         return ResponseEntity.ok(airlineService.getAllAirlines());
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Airline> updateAirline(@PathVariable Long id, @RequestBody Airline airline) {
+        Airline updated = airlineService.updateAirline(id, airline);
+        return (updated != null) ? ResponseEntity.ok(updated) : ResponseEntity.notFound().build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteAirline(@PathVariable Long id) {
+        airlineService.deleteAirline(id);
+        return ResponseEntity.noContent().build();
+    }
 }
