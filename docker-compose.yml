@@ -1,0 +1,11 @@
+version: '3'
+services:
+  myapp-main:
+    image: mim047/airporttracker:latest
+    ports:
+      - 8080:8080
+    environment:
+      #- spring.datasource.url=jdbc:mysql://host.docker.internal:3306/airport_db
+      - spring.datasource.url=jdbc:mysql://airportdb.cj3urig8rllm.us-east-1.rds.amazonaws.com/golf_club
+      - spring.datasource.password=airportdb12!
+      - spring.datasource.username=admin
